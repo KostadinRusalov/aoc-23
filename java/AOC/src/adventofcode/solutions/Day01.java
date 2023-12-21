@@ -44,7 +44,7 @@ public class Day01 {
             case "se" -> 7;
             case "ei" -> 8;
             case "ni" -> 9;
-            default -> throw new RuntimeException();
+            default -> 0;
         };
     }
 
