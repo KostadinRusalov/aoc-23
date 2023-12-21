@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class Day02 {
-    public static final int RED_CUBES = 12;
-    public static final int GREEN_CUBES = 13;
-    public static final int BLUE_CUBES = 14;
+    private static final int RED_CUBES = 12;
+    private static final int GREEN_CUBES = 13;
+    private static final int BLUE_CUBES = 14;
 
-    public record CubeSet(int red, int green, int blue) {
+    private record CubeSet(int red, int green, int blue) {
         public static CubeSet of(String cubeSet) {
             String[] set = cubeSet.split(", ");
             int red = 0;
@@ -18,10 +18,10 @@ public class Day02 {
 
             for (String cubes : set) {
                 String[] tokens = cubes.split(" ");
-                switch (tokens[1]) {
-                    case "red" -> red = Integer.parseInt(tokens[0]);
-                    case "green" -> green = Integer.parseInt(tokens[0]);
-                    case "blue" -> blue = Integer.parseInt(tokens[0]);
+                switch (tokens[1].charAt(0)) {
+                    case 'r'-> red = Integer.parseInt(tokens[0]);
+                    case 'g' -> green = Integer.parseInt(tokens[0]);
+                    case 'b' -> blue = Integer.parseInt(tokens[0]);
                 }
             }
             return new CubeSet(red, green, blue);
@@ -32,7 +32,7 @@ public class Day02 {
         }
     }
 
-    public record Game(int id, List<CubeSet> cubes) {
+    private record Game(int id, List<CubeSet> cubes) {
         public static Game of(String game) {
             String[] tokens = game.split(": ");
             int id = Integer.parseInt(tokens[0].split(" ")[1]);
