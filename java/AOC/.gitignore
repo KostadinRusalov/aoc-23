@@ -3,7 +3,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 
-src/adventofcode/answers/*
+src/adventofcode/*
 ### Eclipse ###
 .apt_generated
 .classpath
