@@ -2,7 +2,6 @@ package adventofcode.solutions;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Pattern;
 
 public class Day02 {
     private static final int RED_CUBES = 12;
