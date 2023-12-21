@@ -61,8 +61,7 @@ public class Day02 {
     }
 
     public static int sumOfPossible(String input) {
-        return Pattern.compile("\\n")
-            .splitAsStream(input)
+        return Arrays.stream(input.split("\\n"))
             .map(Game::of)
             .filter(Game::isPossible)
             .mapToInt(Game::id)
