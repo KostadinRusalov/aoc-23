@@ -1,8 +1,23 @@
 package adventofcode.solutions;
 
+import java.util.Map;
 import java.util.regex.Pattern;
 
+import static java.util.Map.entry;
+
 public class Day01 {
+    private static final Map<String, Integer> nums = Map.ofEntries(
+        entry("one", 1), entry("1", 1),
+        entry("two", 2), entry("2", 2),
+        entry("three", 3), entry("3", 3),
+        entry("four", 4), entry("4", 4),
+        entry("five", 5), entry("5", 5),
+        entry("six", 6), entry("6", 6),
+        entry("seven", 7), entry("7", 7),
+        entry("eight", 8), entry("8", 8),
+        entry("nine", 9), entry("9", 9)
+    );
+
     public static int calibrate1(String input) {
         Pattern pattern = Pattern.compile("\\d.*\\d|\\d");
 
@@ -15,54 +30,19 @@ public class Day01 {
             }).sum();
     }
 
-    public static int calibrate2(String text) {
+    public static int calibrate2(String input) {
         Pattern pattern = Pattern.compile(
             "(one|two|three|four|five|six|seven|eight|nine|\\d).*" +
                 "(one|two|three|four|five|six|seven|eight|nine|\\d)" +
-                "|one|two|three|four|five|six|seven|eight|nine|\\d");
+                "|(one|two|three|four|five|six|seven|eight|nine|\\d)");
 
         return Pattern.compile("\\n")
-            .splitAsStream(text)
-            .mapToInt(word -> {
-                var m = pattern.matcher(word);
+            .splitAsStream(input)
+            .mapToInt(str -> {
+                var m = pattern.matcher(str);
                 m.find();
-                return convertS(word, m.start()) * 10 + convertE(word, m.end() - 1);
+                return m.group(3) == null ? nums.get(m.group(1)) * 10 + nums.get(m.group(2)) :
+                    nums.get(m.group(3)) * 11;
             }).sum();
-    }
-
-    public static int convertS(String word, int start) {
-        if (Character.isDigit(word.charAt(start))) {
-            return word.charAt(start) - '0';
-        }
-        return switch (word.substring(start, start + 2)) {
-            case "on" -> 1;
-            case "tw" -> 2;
-            case "th" -> 3;
-            case "fo" -> 4;
-            case "fi" -> 5;
-            case "si" -> 6;
-            case "se" -> 7;
-            case "ei" -> 8;
-            case "ni" -> 9;
-            default -> 0;
-        };
-    }
-
-    public static int convertE(String word, int end) {
-        if (Character.isDigit(word.charAt(end))) {
-            return word.charAt(end) - '0';
-        }
-        return switch (word.substring(end - 2, end + 1)) {
-            case "one" -> 1;
-            case "two" -> 2;
-            case "ree" -> 3;
-            case "our" -> 4;
-            case "ive" -> 5;
-            case "six" -> 6;
-            case "ven" -> 7;
-            case "ght" -> 8;
-            case "ine" -> 9;
-            default -> 0;
-        };
     }
 }
