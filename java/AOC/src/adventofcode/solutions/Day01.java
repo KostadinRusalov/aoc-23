@@ -3,6 +3,7 @@ package adventofcode.solutions;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import static java.lang.StringTemplate.STR;
 import static java.util.Map.entry;
 
 public class Day01 {
@@ -31,10 +32,8 @@ public class Day01 {
     }
 
     public static int calibrate2(String input) {
-        Pattern pattern = Pattern.compile(
-            "(one|two|three|four|five|six|seven|eight|nine|\\d).*" +
-                "(one|two|three|four|five|six|seven|eight|nine|\\d)" +
-                "|(one|two|three|four|five|six|seven|eight|nine|\\d)");
+        String digit = "(one|two|three|four|five|six|seven|eight|nine|\\d)";
+        Pattern pattern = Pattern.compile(STR. "\{ digit }.*\{ digit }|\{ digit }" );
 
         return Pattern.compile("\\n")
             .splitAsStream(input)
